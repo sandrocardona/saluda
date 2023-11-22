@@ -2,26 +2,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Button } from 'reactstrap';
 
+function Boton(props){
+  return (
+    <Button color={props.color} onClick={props.cambia} >
+      Pulsa para cambiar el color
+    </Button>
+  )
+}
+
 class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      color:"danger",
+    }
+  }
+
+  cambia(){
+    if(this.state.color === "danger"){
+      this.setState({color:"success"})
+    }else{
+      this.setState({color:"danger"})
+    }
+  }
+
   render() {
     return (
       <div className="App">
-        {' '}
-        <Button color="success">
-          Inglés
-        </Button>
-        {' '}
-        <Button color="primary">
-          Alemán
-        </Button>
-        {' '}
-        <Button color='danger'>
-          Sueco
-        </Button>
-        {' '}
-        <Button color="success">
-        Español
-        </Button>
+        <Boton color={this.state.color} cambia={()=>this.cambia()}/>
       </div>
     );
   }
